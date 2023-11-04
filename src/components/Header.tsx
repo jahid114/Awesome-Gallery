@@ -1,40 +1,23 @@
-function Header({
-  images,
-  setImages,
-  selectedImages,
-  setSelectedImages,
-}: {
-  images: string[];
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
-  selectedImages: boolean[];
-  setSelectedImages: React.Dispatch<React.SetStateAction<boolean[]>>;
-}) {
+import useImages from '../hook/useImages';
+import { ImageInfo } from '../imageInfo.type';
+
+function Header() {
+  const { imagesInfo, setImagesInfo } = useImages();
+
+  console.log(imagesInfo);
   // finding out currently selected items index
   let selectedItems: number[] = [];
-  for (let i = 0; i < selectedImages.length; i++) {
-    if (selectedImages[i]) {
+  for (let i = 0; i < imagesInfo.length; i++) {
+    if (imagesInfo[i].isChecked) {
       selectedItems.push(i);
     }
   }
 
-  console.log(selectedItems);
-
-  const handelClick = () => {
-    const imagesUpdate = [...images];
-
-    console.log(selectedItems);
-
-    const selectionUpate = selectedImages.map((value, index) => {
-      if (value) {
-        imagesUpdate.splice(index, 1);
-        return false;
-      }
-      return value;
+  const handelDelete = () => {
+    const _imagesInfo = imagesInfo.filter((value: ImageInfo) => {
+      return !value.isChecked;
     });
-
-    setImages(imagesUpdate);
-    setSelectedImages(selectionUpate);
-
+    setImagesInfo(_imagesInfo);
     selectedItems = [];
   };
 
@@ -45,8 +28,8 @@ function Header({
         {' '}
         <span className='font-bold text-lg'>{selectedItems.length}</span> items selected
       </p>
-      <button className='text-red-600 font-semibold' onClick={handelClick}>
-        Delete
+      <button className='text-red-600 font-semibold' onClick={handelDelete}>
+        Delete Files
       </button>
     </div>
   );
