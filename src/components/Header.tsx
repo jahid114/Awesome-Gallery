@@ -13,7 +13,7 @@ function Header() {
     }
   }
 
-  const handelDelete = () => {
+  const handleDelete = () => {
     const _imagesInfo = imagesInfo.filter((value: ImageInfo) => {
       return !value.isChecked;
     });
@@ -21,14 +21,35 @@ function Header() {
     selectedItems = [];
   };
 
+  const handleAllSelect = () => {
+    const _imagesInfo = imagesInfo.map((value: ImageInfo) => {
+      if (value.isChecked) {
+        value.isChecked = false;
+      }
+      return value;
+    });
+    setImagesInfo(_imagesInfo);
+  };
+
   if (selectedItems.length === 0) return <div className='font-bold'>Gallery</div>;
   return (
     <div className='flex align-middle w-full justify-between px-6'>
-      <p className='font-semibold text-gray-800'>
-        {' '}
-        <span className='font-bold text-lg'>{selectedItems.length}</span> items selected
+      <p className='font-semibold text-gray-800 flex align-middle'>
+        <input
+          type='checkbox'
+          className='w-6 h-6 mx-2'
+          checked={selectedItems.length > 0}
+          onChange={handleAllSelect}
+          title='Click to deselect All'
+        />
+        <span className='font-bold text-lg'>{selectedItems.length}</span> &nbsp;{' '}
+        <span className='pt-[2px]'>items selected</span>
       </p>
-      <button className='text-red-600 font-semibold' onClick={handelDelete}>
+      <button
+        className='text-red-600 font-semibold hover:underline'
+        onClick={handleDelete}
+        title='Delete the selected Files'
+      >
         Delete Files
       </button>
     </div>

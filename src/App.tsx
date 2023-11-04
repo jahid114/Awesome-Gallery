@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Gallery from './components/Gallery';
 import Header from './components/Header';
 import useImages from './hook/useImages';

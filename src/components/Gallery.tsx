@@ -51,6 +51,7 @@ function Gallery() {
             }}
             onDragEnd={handleSort}
             onDragOver={(e) => e.preventDefault()}
+            title='Drag to reorder images'
           >
             <picture>
               <img src={image.imageUrl} className='border-2 rounded-md border-gray-300 object-cover aspect-square' />
