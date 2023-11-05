@@ -1,7 +1,7 @@
 # Awesome Gallary
 
 ### Live Demo
-
+See the live demo here : [https://awesome-gallery.vercel.app/]
 ### Run the app locally
 
 ##### Download the source code
