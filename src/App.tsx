@@ -10,7 +10,12 @@ const gallery = Object.values(
 );
 
 function App() {
-  const { setImagesInfo } = useImages();
+  const ImageData = useImages();
+
+  const { setImagesInfo } = ImageData as {
+    imagesInfo: ImageInfo[];
+    setImagesInfo: (imagesInfo: ImageInfo[]) => void;
+  };
 
   useEffect(() => {
     // taking images from initial folder

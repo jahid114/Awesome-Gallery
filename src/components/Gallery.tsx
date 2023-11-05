@@ -8,7 +8,11 @@ function Gallery() {
   const dragOverItem = useRef<number | null>(null);
 
   // use ImageContext in order to use and update imageInfo State
-  const { imagesInfo, setImagesInfo } = useImages();
+  const ImageData = useImages();
+  const { imagesInfo, setImagesInfo } = ImageData as {
+    imagesInfo: ImageInfo[];
+    setImagesInfo: (imagesInfo: ImageInfo[]) => void;
+  };
 
   const handleSort = () => {
     //duplicate items
@@ -50,10 +54,10 @@ function Gallery() {
               index === 0 ? 'sm:col-span-2 md:row-span-2' : ''
             } cursor-pointer group relative`}
             draggable
-            onDragStart={(e) => {
+            onDragStart={() => {
               dragItem.current = index;
             }}
-            onDragEnter={(e) => {
+            onDragEnter={() => {
               dragOverItem.current = index;
             }}
             onDragEnd={handleSort}

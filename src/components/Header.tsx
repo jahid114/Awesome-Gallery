@@ -3,7 +3,12 @@ import { ImageInfo } from '../imageInfo.type';
 
 function Header() {
   // use ImageContext in order to use and update imageInfo State
-  const { imagesInfo, setImagesInfo } = useImages();
+  const ImageData = useImages();
+
+  const { imagesInfo, setImagesInfo } = ImageData as {
+    imagesInfo: ImageInfo[];
+    setImagesInfo: (imagesInfo: ImageInfo[]) => void;
+  };
   // finding out currently selected items index
   let selectedItems: number[] = [];
   for (let i = 0; i < imagesInfo.length; i++) {

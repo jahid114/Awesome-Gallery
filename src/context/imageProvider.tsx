@@ -1,7 +1,9 @@
 import { createContext, useState } from 'react';
 import { ImageInfo } from '../imageInfo.type';
 
-export const ImageContext = createContext<{ imagesInfo: ImageInfo[]; setImagesInfo: () => void } | object>({});
+export const ImageContext = createContext<
+  { imagesInfo: ImageInfo[]; setImagesInfo: (imagesInfo: ImageInfo[]) => void } | object
+>({});
 
 function ImageProvider({ children }: { children: string | JSX.Element | JSX.Element[] }) {
   const [imagesInfo, setImageInfo] = useState<ImageInfo[] | []>([]);
