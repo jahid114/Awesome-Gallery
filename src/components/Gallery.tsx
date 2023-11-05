@@ -1,10 +1,13 @@
 import { useRef } from 'react';
+
 import useImages from '../hook/useImages';
 import { ImageInfo } from '../imageInfo.type';
 
 function Gallery() {
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
+
+  // use ImageContext in order to use and update imageInfo State
   const { imagesInfo, setImagesInfo } = useImages();
 
   const handleSort = () => {
@@ -26,12 +29,14 @@ function Gallery() {
   };
 
   const handleSelection = (index: number) => {
+    // track the checked images
     const changedImagesInfo = imagesInfo.map((value: ImageInfo, i: number) => {
       if (i === index) {
         value.isChecked = !value.isChecked;
       }
       return value;
     });
+    // update the checked info
     setImagesInfo(changedImagesInfo);
   };
 
@@ -45,7 +50,9 @@ function Gallery() {
               index === 0 ? 'sm:col-span-2 md:row-span-2' : ''
             } cursor-pointer group relative`}
             draggable
-            onDragStart={(e) => (dragItem.current = index)}
+            onDragStart={(e) => {
+              dragItem.current = index;
+            }}
             onDragEnter={(e) => {
               dragOverItem.current = index;
             }}

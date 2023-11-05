@@ -13,6 +13,8 @@ function App() {
   const { setImagesInfo } = useImages();
 
   useEffect(() => {
+    // taking images from initial folder
+
     const tempImagesInfo: ImageInfo[] = [];
 
     gallery.map((imageUrl) => {
